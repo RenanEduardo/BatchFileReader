@@ -3,6 +3,8 @@ module.exports = class Salesman {
         this.cpf = cpf;
         this.name = name;
         this.salary = salary;
+        this.sales = [];
+        this.totalSales = 0;
     };
 
     getCPF() {
@@ -15,6 +17,23 @@ module.exports = class Salesman {
 
     getSalary() {
         return this.salary;
+    }
+
+    getSales() {
+        return this.sales;
+    }
+
+    getTotalSales() {
+        this.calculateTotalSales();
+        return this.totalSales;
+    }
+
+    calculateTotalSales() {
+        this.totalSales = 0;
+        this.sales.forEach(sale => {
+            this.totalSales += sale.getSaleTotalPrice();
+        })
+
     }
 
     toString() {

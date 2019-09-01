@@ -50,9 +50,10 @@ class Interpreter {
     itemsData.forEach(itemData => {
         items.push(this.createItem(itemData));
     })
-    
-    this.sales.push(this.createSale(data[1],items, data[3]));
-
+    var sale = this.createSale(data[1],items, data[3]);
+    this.sales.push(sale);
+    var salesman = this.salesmen.find((salesman) => salesman.name === sale.salesman);
+    salesman.sales.push(sale);
   };
 
   processFile = (file,lines) => {
@@ -63,7 +64,7 @@ class Interpreter {
     this.analyzer.analyzeClientQuantity(this.clients);
     this.analyzer.analyzeSalesmenQuantity(this.salesmen);
     this.analyzer.analyzeMostExpensiveSale(this.sales);
-    this.analyzer.analyzeWorstSalesman(this.sales);
+    this.analyzer.analyzeWorstSalesman(this.salesmen);
     return this.analyzer.printAnalysisResults();
   };
 
@@ -71,8 +72,7 @@ class Interpreter {
     const data = line.split("ç");
     const type = data[0];
     switch (type) {
-      case SALESMAN:
-        
+      case SALESMAN: 
         this.createSalesmanFromData(data);
         break;
       case CLIENT:

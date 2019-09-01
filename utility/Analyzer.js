@@ -7,6 +7,7 @@ class Analyzer {
         this.worstSalesman = '';
         this.file = file;
         this.sortedSales = [];
+        this.sortedSalesmen = [];
     }
 
     analyzeClientQuantity = (clients = []) => {
@@ -28,29 +29,40 @@ class Analyzer {
                 totalValue: sale.getSaleTotalPrice()
             })
         });
-        this.sortedSales = this.sortSales(unsortedSales);
+        this.sortedSales = this.sort(unsortedSales, this.mostExpensive);
         this.mostExpensiveSale = this.sortedSales[0];
     }
 
-    analyzeWorstSalesman = (sales) => {
+    analyzeWorstSalesman = (salesmen = []) => {
         console.log(chalk.bold.magenta('Analyzing worst salesman...'));
-        this.worstSalesman = this.sortedSales[this.sortedSales.length - 1].salesman;
+        this.sortedSalesmen = this.sort(salesmen,this.mostSalesTotal);
+        this.worstSalesman = this.sortedSalesmen[0];
     }
 
     printAnalysisResults() {
         const line_1 = `------- ${this.file} -------`;
-        const line_2 = `Quantity of clients: ${this.clientQuantity}`
-        const line_3 = `Quantity of salesmen: ${this.salesmenQuantity}`
-        const line_4 = `Most Expensive Sale: saleId ${this.mostExpensiveSale.id}`
-        const line_5 = `Worst Salesman: ${this.worstSalesman}`
-
+        const line_2 = `Quantity of clients: ${this.clientQuantity}`;
+        const line_3 = `Quantity of salesmen: ${this.salesmenQuantity}`;
+        const line_4 = `Most Expensive Sale: saleId ${this.mostExpensiveSale.id}`;
+        const line_5 = `Worst Salesman: ${this.worstSalesman.name} with a total of ${this.worstSalesman.getTotalSales()}`;
         return `${line_1}\n${line_2}\n${line_3}\n${line_4}\n${line_5}\n`
     }
 
-    sortSales(array) {
-        return array.sort(this.compareValue);
+    sort(array, sortMode) {
+        return array.sort(sortMode);
     }
-    compareValue = (saleA, saleB) => {
+
+
+    mostSalesTotal = (salesmanA, salesmanB) => {
+        if(salesmanA.getTotalSales() > salesmanB.getTotalSales()) {
+            return 1;
+        }else if(salesmanA.getTotalSales() < salesmanB.getTotalSales()) {
+            return -1;
+        }else {
+            return 0;
+        }
+    }
+    mostExpensive = (saleA, saleB) => {
         if(saleA.totalValue < saleB.totalValue) {
             return 1;
         }else if(saleA.totalValue > saleB.totalValue) {
