@@ -17,8 +17,8 @@
   },
   "homepage": "https://github.com/RenanEduardo/BatchFileReader#readme",
   "dependencies": {
+    "chalk": "^2.4.2",
     "fs-extra": "^8.1.0",
-    "watch": "^1.0.2",
-    "yargs": "^13.3.0"
+    "watch": "^1.0.2"
   }
 }

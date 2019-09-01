@@ -16,7 +16,6 @@ module.exports = class Sale {
     getSaleTotalPrice() {
         let totalPrice = 0;
         this.getItems().forEach(item => {
-            console.log(item)
             totalPrice += item.price * item.itemQuantity;
         })
         return totalPrice;
@@ -27,7 +26,7 @@ module.exports = class Sale {
     }
 
     toString() {
-        let itemsString = ''
+        let itemsString = '';
         this.getItems().forEach(item => {
             itemsString += item.toString();
         })

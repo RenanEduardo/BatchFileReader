@@ -1,3 +1,4 @@
+const chalk = require('chalk');
 const Salesman = require("../models/Salesman");
 const Clients = require("../models/Client");
 const Sale = require("../models/Sale");
@@ -81,7 +82,7 @@ class Interpreter {
           this.createSaleFromData(data);
         break;
       default:
-        console.log("ENTRY NOT VALID");
+        console.log(chalk.bold.red("IGNORING ENTRY NOT VALID"));
     }
   };
 }

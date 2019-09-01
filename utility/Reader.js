@@ -1,10 +1,11 @@
 const fse = require('fs-extra');
+const chalk = require('chalk')
 const readline = require('readline');
 var stream = require('stream');
 
 const startReadingFile = async (filepath) => {
 
-    console.info(`Start reading file ${filepath}...`);
+    console.info(chalk.bgYellow.bold.black(`Start reading file ${filepath}...`));
     let lines = [];
     var instream = fse.createReadStream(filepath);
     var outstream = new stream;
@@ -21,8 +22,11 @@ const startReadingFile = async (filepath) => {
 
 }
 
-const createDir = async (outputDir) => {
-    fse.ensureDir(outputDir);
+const createDir = (outputDir) => {
+    console.log(chalk.bgYellow.bold.black('Creating directory: ', outputDir));
+    fse.ensureDirSync(outputDir,{ 
+        mode: 0o2775
+    });
 }
 
 const getLinesFromFile = async (filepath) => {

@@ -1,3 +1,4 @@
+const chalk = require('chalk');
 class Analyzer {
     constructor(file) {
         this.clientQuantity = 0;
@@ -5,20 +6,21 @@ class Analyzer {
         this.mostExpensiveSale = null;
         this.worstSalesman = '';
         this.file = file;
+        this.sortedSales = [];
     }
 
     analyzeClientQuantity = (clients = []) => {
-        console.log('Analyzing clients...');
+        console.log(chalk.bold.magenta('Analyzing clients...'));
         this.clientQuantity = clients.length;
     }
 
     analyzeSalesmenQuantity = (salesmen = []) => {
-        console.log('Analyzing salesmen...');
+        console.log(chalk.bold.magenta('Analyzing salesmen...'));
         this.salesmenQuantity = salesmen.length;
     }
 
     analyzeMostExpensiveSale = (sales = []) => {
-        console.log('Analyzing most expensive sale...');
+        console.log(chalk.bold.magenta('Analyzing most expensive sale...'));
         var unsortedSales = [];
         sales.forEach(sale => {
             unsortedSales.push({
@@ -26,26 +28,23 @@ class Analyzer {
                 totalValue: sale.getSaleTotalPrice()
             })
         });
-        var sortedSales = this.sortSales(unsortedSales);
-        this.mostExpensiveSale = sortedSales[0];
-        console.log(this.mostExpensiveSale);
+        this.sortedSales = this.sortSales(unsortedSales);
+        this.mostExpensiveSale = this.sortedSales[0];
     }
 
     analyzeWorstSalesman = (sales) => {
-        console.log('Analyzing worst salesman...');
-        var sortedSales = this.sortSales(sales);
-        this.worstSalesman = sortedSales[sortedSales.length - 1].salesman;
-        console.log(this.worstSalesman)
+        console.log(chalk.bold.magenta('Analyzing worst salesman...'));
+        this.worstSalesman = this.sortedSales[this.sortedSales.length - 1].salesman;
     }
 
     printAnalysisResults() {
-        return (`
-        ------- ${this.file} -------
-        Quantity of clients: ${this.clientQuantity}
-        Quantity of salesmen: ${this.salesmenQuantity}
-        Most Expensive Sale: saleId ${this.mostExpensiveSale.id} 
-        Worst Salesman: ${this.worstSalesman}
-        `)
+        const line_1 = `------- ${this.file} -------`;
+        const line_2 = `Quantity of clients: ${this.clientQuantity}`
+        const line_3 = `Quantity of salesmen: ${this.salesmenQuantity}`
+        const line_4 = `Most Expensive Sale: saleId ${this.mostExpensiveSale.id}`
+        const line_5 = `Worst Salesman: ${this.worstSalesman}`
+
+        return `${line_1}\n${line_2}\n${line_3}\n${line_4}\n${line_5}\n`
     }
 
     sortSales(array) {
