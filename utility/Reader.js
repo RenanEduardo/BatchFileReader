@@ -2,18 +2,6 @@ const fse = require('fs-extra');
 const readline = require('readline');
 var stream = require('stream');
 
-
-
-// const formatDir = (path) => {
-//     fse.emptyDir(path)
-//         .then(() => {
-//             console.info('Directory formatted');
-//         })
-//         .catch(error => {
-//             console.error('An error has occurred while attempting to format directory:', error)
-//         })
-// }
-
 const startReadingFile = async (filepath) => {
 
     console.info(`Start reading file ${filepath}...`);
@@ -33,6 +21,10 @@ const startReadingFile = async (filepath) => {
 
 }
 
+const createDir = async (outputDir) => {
+    fse.ensureDir(outputDir);
+}
+
 const getLinesFromFile = async (filepath) => {
     let lines = await startReadingFile(filepath);
     return lines;
@@ -44,5 +36,6 @@ const readDir = (filepath) => {
 
 module.exports = {
     readDir: readDir,
-    getLinesFromFile: getLinesFromFile
+    getLinesFromFile: getLinesFromFile,
+    createDir: createDir
 }

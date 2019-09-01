@@ -5,19 +5,19 @@ module.exports = class Client {
         this.businessArea = businessArea;
     };
 
-    getCNPJ = () => {
+    getCNPJ(){
         return this.cnpj;
     }
 
-    getName = () => {
+    getName() {
         return this.nome
     }
 
-    getBusinessArea = () => {
+    getBusinessArea() {
         return this.businessArea;
     }
 
-    toString = () => {
+    toString() {
         return `Nome: ${this.getName()}, CNPJ: ${this.getCNPJ()}, Area de Atuação: ${this.getBusinessArea()}` 
     }
      

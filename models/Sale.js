@@ -5,15 +5,15 @@ module.exports = class Sale {
         this.salesman = salesman;
     };
 
-    getId = () => {
+    getId() {
         return this.id;
     }
 
-    getItems = () => {
+    getItems(){
         return this.items
     }
 
-    getSaleTotalPrice = () => {
+    getSaleTotalPrice() {
         let totalPrice = 0;
         this.getItems().forEach(item => {
             console.log(item)
@@ -22,11 +22,11 @@ module.exports = class Sale {
         return totalPrice;
     }
 
-    getSalesman = () => {
+    getSalesman() {
         return this.salesman;
     }
 
-    toString = () => {
+    toString() {
         let itemsString = ''
         this.getItems().forEach(item => {
             itemsString += item.toString();

@@ -5,7 +5,7 @@ module.exports = class Item {
         this.price = price;
     }
 
-    toString = () => {
+    toString() {
         return `
         ${this.itemId} | ${this.itemQuantity} | ${this.price}
         `

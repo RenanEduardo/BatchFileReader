@@ -5,19 +5,19 @@ module.exports = class Salesman {
         this.salary = salary;
     };
 
-    getCPF = () => {
+    getCPF() {
         return this.cpf;
     }
 
-    getName = () => {
+    getName(){
         return this.name
     }
 
-    getSalary = () => {
+    getSalary() {
         return this.salary;
     }
 
-    toString = () => {
+    toString() {
         return `Name: ${this.getName()}, CPF: ${this.getCPF()}, Salary: ${this.getSalary()}` 
     }
      

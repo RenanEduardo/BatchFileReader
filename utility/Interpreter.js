@@ -10,12 +10,12 @@ const CLIENT = "002";
 const SALE = "003";
 
 class Interpreter {
-  constructor() {
+  constructor(file) {
     this.salesmen = [];
     this.clients = [];
     this.sales = [];
-    this.currentFile = null;
-    this.analyzer = new Analyzer();
+    this.currentFile = file;
+    this.analyzer = new Analyzer(this.currentFile);
   }
 
   createSalesman = (cpf, nome, salario = 0) => {
@@ -59,8 +59,11 @@ class Interpreter {
     lines.forEach(line => {
       this.processLine(line);
     });
-
+    this.analyzer.analyzeClientQuantity(this.clients);
+    this.analyzer.analyzeSalesmenQuantity(this.salesmen);
     this.analyzer.analyzeMostExpensiveSale(this.sales);
+    this.analyzer.analyzeWorstSalesman(this.sales);
+    return this.analyzer.printAnalysisResults();
   };
 
   processLine = line => {
